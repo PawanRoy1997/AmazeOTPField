@@ -5,20 +5,23 @@ import Dependencies.UnitTesting
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("jacoco")
+//    id("plugins.jacoco")
+    id("plugins.gitHooks")
 }
 
 android {
-    namespace = "PawanRoy1997.otpfield"
-    compileSdk = 33
+    namespace = Application.namespace
+    compileSdk = Application.compileSdk
 
     defaultConfig {
-        applicationId = "PawanRoy1997.otpfield"
-        minSdk = 16
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Application.applicationId
+        minSdk = Application.minSdk
+        targetSdk = Application.targetSdk
+        versionCode = Application.versionCode
+        versionName = Application.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Application.testInstrumentationRunner
     }
 
     buildTypes {
@@ -36,6 +39,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    testCoverage {
+        buildToolsVersion = ("30.0.3")
+    }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
     }
 }
 
