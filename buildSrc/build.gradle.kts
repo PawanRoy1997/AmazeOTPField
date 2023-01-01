@@ -1,7 +1,5 @@
 plugins {
     `kotlin-dsl`
-    jacoco
-    id("org.sonarqube") version ("3.5.0.2730")
 }
 repositories {
     google()

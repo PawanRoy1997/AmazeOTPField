@@ -5,9 +5,18 @@ import Dependencies.UnitTesting
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("jacoco")
-//    id("plugins.jacoco")
+    jacoco
     id("plugins.gitHooks")
+    id("org.sonarqube") version ("3.5.0.2730")
+}
+
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "PawanRoy1997_AmazeOTPField")
+        property("sonar.organization", "pawanroy1997")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
 
 android {
