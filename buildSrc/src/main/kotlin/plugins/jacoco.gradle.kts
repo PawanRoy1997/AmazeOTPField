@@ -1,5 +1,9 @@
 package plugins
 
+apply {
+    plugins
+}
+
 tasks.withType<Test> {
     configure<JacocoTaskExtension> {
         isIncludeNoLocationClasses = true
@@ -42,15 +46,14 @@ private val executionDataTree = fileTree(project.buildDir) {
         "outputs/code_coverage/**/*.ec",
         "jacoco/jacocoTestReportDebug.exec",
         "jacoco/testDebugUnitTest.exec",
-        "jacoco/test.exec"
+        "jacoco/test.exec",
+        "jdk.internal.*"
     )
 }
 
 fun JacocoReportsContainer.reports() {
     xml.required.set(true)
     html.required.set(true)
-    xml.outputLocation.set(file("${buildDir}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"))
-    html.outputLocation.set(file("${buildDir}/reports/jacoco/jacocoTestReport/html"))
 }
 
 fun JacocoCoverageVerification.setDirectories() {
