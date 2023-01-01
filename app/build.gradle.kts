@@ -1,20 +1,27 @@
+import Dependencies.Instrumentation
+import Dependencies.Normal
+import Dependencies.UnitTesting
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("jacoco")
+//    id("plugins.jacoco")
+    id("plugins.gitHooks")
 }
 
 android {
-    namespace = "PawanRoy1997.otpfield"
-    compileSdk = 33
+    namespace = Application.namespace
+    compileSdk = Application.compileSdk
 
     defaultConfig {
-        applicationId = "PawanRoy1997.otpfield"
-        minSdk = 16
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Application.applicationId
+        minSdk = Application.minSdk
+        targetSdk = Application.targetSdk
+        versionCode = Application.versionCode
+        versionName = Application.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Application.testInstrumentationRunner
     }
 
     buildTypes {
@@ -25,6 +32,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -33,15 +44,22 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testCoverage {
+        buildToolsVersion = ("30.0.3")
+    }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+}
+
+jacoco {
+    this.toolVersion = "0.8.8"
 }
 
 dependencies {
-
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.7.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    Normal.lists.forEach(::implementation)
+    UnitTesting.list.forEach(::testImplementation)
+    Instrumentation.list.forEach(::androidTestImplementation)
 }

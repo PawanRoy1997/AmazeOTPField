@@ -1,8 +1,7 @@
-package PawanRoy1997.otpField
+package pawanroy1997.otpField
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
