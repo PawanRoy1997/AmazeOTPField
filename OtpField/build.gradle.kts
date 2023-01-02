@@ -1,17 +1,18 @@
 plugins {
+    jacoco
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "PawanRoy1997.otpField"
-    compileSdk = 33
+    namespace = Application.namespace
+    compileSdk = Application.compileSdk
 
     defaultConfig {
-        minSdk = 16
-        targetSdk = 33
+        minSdk = Application.minSdk
+        targetSdk = Application.targetSdk
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Application.testInstrumentationRunner
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -23,6 +24,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -31,6 +36,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testCoverage {
+        buildToolsVersion = ("30.0.3")
+    }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+}
+
+jacoco {
+    this.toolVersion = "0.8.8"
 }
 
 dependencies {
